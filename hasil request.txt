@@ -1,0 +1,58 @@
+POST localhost:3000/api/v1/createImage
+{
+    "data": {
+        "id": 3,
+        "judul": "Aplikasi Apotik",
+        "deskripsi": "GUI aplikasi apotik",
+        "imageURL": "https://ik.imagekit.io/AdeliaPutriAdyani/mini_projecxt_C4DUKVQGM.jpeg"
+    }
+}
+
+GET localhost:3000/api/v1/image
+{
+    "data": [
+        {
+            "id": 1,
+            "judul": "Virtual Background",
+            "deskripsi": "zoom vgb kelas",
+            "imageURL": "https://ik.imagekit.io/AdeliaPutriAdyani/A_FPMRgYnWg.jpg"
+        },
+        {
+            "id": 2,
+            "judul": "Challenge Chapter 6",
+            "deskripsi": "Progres Pengerjaan challenge chapter 6",
+            "imageURL": "https://ik.imagekit.io/AdeliaPutriAdyani/Screenshot__113__Ntny6KOQa.png"
+        },
+        {
+            "id": 3,
+            "judul": "Aplikasi Apotik",
+            "deskripsi": "GUI aplikasi apotik",
+            "imageURL": "https://ik.imagekit.io/AdeliaPutriAdyani/mini_projecxt_C4DUKVQGM.jpeg"
+        }
+    ]
+}
+
+GET localhost:3000/api/v1/image/3
+{
+    "data": {
+        "id": 3,
+        "judul": "Aplikasi Apotik",
+        "deskripsi": "GUI aplikasi apotik",
+        "imageURL": "https://ik.imagekit.io/AdeliaPutriAdyani/mini_projecxt_C4DUKVQGM.jpeg"
+    }
+}
+
+PUT localhost:3000/api/v1/imageUpdate/3
+{
+    "data": {
+        "id": 3,
+        "judul": "App Apotek",
+        "deskripsi": "GUI Aplikasi Apotek untuk LSP",
+        "imageURL": "https://ik.imagekit.io/AdeliaPutriAdyani/mini_projecxt_C4DUKVQGM.jpeg"
+    }
+}
+
+DELETE localhost:3000/api/v1/imageDelete/3
+{
+    "message": "Data Gambar berhasil dihapus"
+}

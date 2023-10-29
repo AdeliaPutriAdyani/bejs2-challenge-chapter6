@@ -1,5 +1,6 @@
 const { PrismaClient } = require('@prisma/client')
 const { imageKit } = require('../utils')
+const { image } = require('node-qr-image');
 
 const prisma = new PrismaClient();
 
@@ -30,6 +31,7 @@ module.exports = {
             data: foto
         });
     },
+
     getImageId : async (req, res) => {
         const imageId = parseInt(req.params.imageId)
 
@@ -51,6 +53,7 @@ module.exports = {
                  id: imageId
             }
         });
+
         res.json({ 
             message: 'Data Gambar berhasil dihapus' 
         });

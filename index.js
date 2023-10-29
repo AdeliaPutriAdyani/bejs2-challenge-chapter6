@@ -3,8 +3,8 @@ const app = express()
 const PORT = process.env.PORT || 3000
 const router = require('./routers')
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 app.use('/images', express.static('public/images'))
 app.use('/api/v1', router)
 

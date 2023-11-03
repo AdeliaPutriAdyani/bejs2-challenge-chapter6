@@ -11,6 +11,7 @@ router.get('/', (req, res) => {
 })
 
 router.post('/createImage', multerLib.single('imageURL'), imageController.createImage)
+router.post('/createImage', multerLib.single('imageURL'), imageController.createImage)
 router.get('/image', imageController.getImage)
 router.get('/image/:imageId', imageController.getImageId)
 router.delete('/imageDelete/:imageId', imageController.deleteImage)

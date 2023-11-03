@@ -1,29 +1,34 @@
 const { PrismaClient } = require('@prisma/client')
 const { imageKit } = require('../utils')
-const { image } = require('node-qr-image');
 
 const prisma = new PrismaClient();
 
 module.exports = {
-    createImage : async (req, res) => {
-        const fileToString = req.file.buffer.toString('base64')
-        const uploadFile = await imageKit.upload({
-            fileName: req.file.originalname,
-            file: fileToString
-        })
+    createImage : async (req, res, next) => {
+        try {
+            const fileToString = req.file.buffer.toString('base64')
+            const uploadFile = await imageKit.upload({
+                fileName: req.file.originalname,
+                file: fileToString
+            })
+    
+            const newImage = await prisma.image.create({
+                data: {
+                    judul: req.body.judul,
+                    deskripsi: req.body.deskripsi,
+                    imageURL: uploadFile.url
+                }
+            });
+    
+            return res.json({
+                data: newImage
+            });
 
-        const newImage = await prisma.image.create({
-            data: {
-                judul: req.body.judul,
-                deskripsi: req.body.deskripsi,
-                imageURL: uploadFile.url
-            }
-        });
-
-        return res.json({
-            data: newImage
-        });
+        } catch (error) {
+            return next(error)
+        }
     },
+
     getImage : async (req, res) => {
         const foto = await prisma.image.findMany();
 
@@ -59,7 +64,7 @@ module.exports = {
         });
     },   
 
-    updateImage : async (req, res) => {
+    updateImage : async (req, res, next) => {
         const imageId = parseInt(req.params.imageId);
 
         const imageUpdate = await prisma.image.findUnique({
@@ -69,7 +74,9 @@ module.exports = {
         });
 
         if (!imageUpdate) {
-            return res.status(404).json({ error: 'Gambar tidak ditemukan' });
+            return res.status(404).json({ 
+                error: 'Data Gambar tidak ditemukan' 
+            });
         }
 
         try {
@@ -83,9 +90,12 @@ module.exports = {
                 }
             });
 
-            return res.json({ data: updatedImage });
+            return res.json({ 
+                data: updatedImage 
+            });
+
         } catch (error) {
-            return res.status(500).json({ error: 'Gagal memperbarui gambar' });
+            next(error)
         }
     }
 }

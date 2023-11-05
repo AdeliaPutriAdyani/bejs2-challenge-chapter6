@@ -7,7 +7,7 @@ const errorHandling = require('./middlewares/errorHandling')
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use('/images', express.static('public/images'))
-app.use('bejs2-challenge-chapter6-production.up.railway.app/api/v1', router)
+app.use('/api/v1', router)
 
 app.use(errorHandling)
 app.get('*', (req, res) => {

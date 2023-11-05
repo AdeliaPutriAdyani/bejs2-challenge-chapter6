@@ -12,7 +12,7 @@ module.exports = {
                 file: fileToString
             })
     
-            const newImage = await prisma.image.create({
+            const newImage = await prisma.Image.create({
                 data: {
                     judul: req.body.judul,
                     deskripsi: req.body.deskripsi,
@@ -30,7 +30,7 @@ module.exports = {
     },
 
     getImage : async (req, res) => {
-        const foto = await prisma.image.findMany();
+        const foto = await prisma.Image.findMany();
 
         return res.json({
             data: foto
@@ -40,7 +40,7 @@ module.exports = {
     getImageId : async (req, res) => {
         const imageId = parseInt(req.params.imageId)
 
-        const fotoId = await prisma.image.findUnique({
+        const fotoId = await prisma.Imagemage.findUnique({
             where: {
                 id: imageId
             }
@@ -53,7 +53,7 @@ module.exports = {
 
     deleteImage : async (req, res) => {
         const imageId = parseInt(req.params.imageId);
-        await prisma.image.delete({ 
+        await prisma.Image.delete({ 
             where: {
                  id: imageId
             }
@@ -67,7 +67,7 @@ module.exports = {
     updateImage : async (req, res, next) => {
         const imageId = parseInt(req.params.imageId);
 
-        const imageUpdate = await prisma.image.findUnique({
+        const imageUpdate = await prisma.Image.findUnique({
             where: {
                 id: imageId,
             },
@@ -80,7 +80,7 @@ module.exports = {
         }
 
         try {
-            const updatedImage = await prisma.image.update({
+            const updatedImage = await prisma.Image.update({
                 where: {
                     id: imageId,
                 },
